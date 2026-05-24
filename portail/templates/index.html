@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel='stylesheet' href='/static/styles.css'>
+<title>Réservations</title>
+</head>
+
+<body>
+
+<div class='site-header'>
+ <div class='brand'>
+   <div class='brand-logo'>OUPS</div>
+   <div class='brand-text'>
+     <h1>Portail de réservation</h1>
+     <div class='tagline'>Développer vite. Casser souvent.</div>
+   </div>
+ </div>
+</div>
+
+<div class='container'>
+ <div class='panel'>
+   <h2>Bienvenue {{ user.username }} !</h2>
+   <a class='button' href='/logout'>Déconnexion</a>
+<!-- Liens ajoutés pour la démonstration du TP -->
+<p style="margin-top:15px;">
+
+  <!-- Version vulnérable -->
+  <a class='button' href='/search-vulnerable'>
+    Recherche vulnérable
+  </a>
+
+  <!-- Version corrigée -->
+  <a class='button' href='/search'>
+    Recherche sécurisée
+  </a>
+
+</p>
+   <h3 style='margin-top:24px;'>Réserver une salle</h3>
+
+   <form action='/reserve' method='POST' class='login-form'>
+      <input type='datetime-local' name='datetime' required>
+
+      <select name='room_id'>
+        {% for room in rooms %}
+          <option value='{{ room.id }}'>
+            {{ room.name }} ({{ room.capacity }} places)
+          </option>
+        {% endfor %}
+      </select>
+
+      <button type='submit'>Réserver</button>
+
+      {% if error %}
+        <p style='color:#ef4444;font-weight:bold;'>
+          La salle est déjà réservée à cette heure. Veuillez choisir une plage horaire différente.
+        </p>
+        <p style='color:#ef4444;font-style:italic;'>
+          Veuillez noter que les réservations commencent toujours à l'heure pile (:00) pour une durée d'une heure.
+          Ainsi va la vie chez Oups Technologies!
+        </p>
+      {% endif %}
+   </form>
+ </div>
+</div>
+
+<div class='container'>
+ <div class='panel'>
+   <h2>Vos réservations</h2>
+
+   {% for res in reservations %}
+      <p>{{ res['datetime'] }} : {{ res['name'] }} ({{ res['capacity'] }} places)</p>
+   {% else %}
+      <p>Aucune réservation pour le moment.</p>
+   {% endfor %}
+ </div>
+</div>
+
+<div class='container'>
+ <div class='panel'>
+   <h2>Réservations des autres utilisateurs</h2>
+
+   {% for res in other_reservations %}
+      <p>
+        {{ res['datetime'] }} :
+        {{ res['name'] }}
+        ({{ res['capacity'] }} places)
+        — réservé par {{ res['username'] }}
+      </p>
+   {% else %}
+      <p>Aucune réservation faite par les autres utilisateurs.</p>
+   {% endfor %}
+ </div>
+</div>
+
+</body>
+</html>

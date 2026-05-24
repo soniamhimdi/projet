@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head>
+<link rel='stylesheet' href='/static/styles.css'>
+<title>Connexion</title></head>
+<body>
+<div class='site-header'>
+ <div class='brand'>
+   <div class='brand-logo'>OUPS</div>
+   <div class='brand-text'>
+     <h1>Portail interne</h1>
+     <div class='tagline'>Développer vite. Casser souvent.</div>
+   </div>
+ </div>
+</div>
+<div class='container'>
+ <div class='panel'>
+   <h2>Connexion</h2>
+   {% if error %}<p style='color:#ef4444;'>{{ error }}</p>{% endif %}
+   <form method='POST' class='login-form'>
+      <input name='username' placeholder="Nom d'utilisateur" required>
+      <input type='password' name='password' placeholder="Mot de passe" required>
+      <button type='submit'>Se connecter</button>
+   </form>
+ </div>
+</div>
+</body></html>

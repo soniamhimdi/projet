@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Recherche</title>
+</head>
+
+<body>
+
+<div class="site-header">
+    <div class="brand">
+        <div class="brand-logo">OUPS</div>
+        <div class="brand-text">
+            <h1>Recherche de réservations</h1>
+            <div class="tagline">Développer vite. Casser souvent.</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel">
+
+        <a class="button" href="/">Retour à l'accueil</a>
+
+        {% if mode == 'vulnerable' %}
+            <h2 style="color:#ef4444;">Recherche vulnérable</h2>
+            <p>
+                Cette page est volontairement vulnérable à l'injection SQL
+                pour les besoins du TP.
+            </p>
+        {% else %}
+            <h2 style="color:#16a34a;">Recherche sécurisée</h2>
+            <p>
+                Cette page utilise une requête paramétrée.
+            </p>
+        {% endif %}
+
+        <form method="GET" class="login-form">
+            <input
+                type="text"
+                name="q"
+                placeholder="Nom de salle"
+                value="{{ keyword }}"
+            >
+
+            <button type="submit">Rechercher</button>
+        </form>
+
+    </div>
+</div>
+<div class="container">
+    <div class="panel">
+
+        <h2>Résultats</h2>
+        {% for res in results %}
+            <p>
+                {{ res['datetime'] }} :
+                {{ res['name'] }}
+                ({{ res['capacity'] }} places)
+                — réservé par {{ res['username'] }}
+            </p>
+        {% else %}
+            <p>Aucun résultat.</p>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+</body>
+</html>
