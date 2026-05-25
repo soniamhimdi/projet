@@ -1,0 +1,55 @@
+{
+  "reportSchema": "1.1",
+  "scanInfo": {
+    "engineVersion": "12.1.0",
+    "dataSource": [
+      {
+        "name": "NVD API Last Checked",
+        "timestamp": "2026-05-21T01:32:32-04"
+      },
+      {
+        "name": "NVD API Last Modified",
+        "timestamp": "2026-05-21T05:16:23Z"
+      }
+    ]
+  },
+  "projectInfo": {
+    "name": "portail",
+    "reportDate": "2026-05-21T05:32:46.954319838Z",
+    "credits": {
+      "NVD": "This product uses the NVD API but is not endorsed or certified by the NVD. This report contains data retrieved from the National Vulnerability Database: https://nvd.nist.gov",
+      "CISA": "This report may contain data retrieved from the CISA Known Exploited Vulnerability Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "NPM": "This report may contain data retrieved from the Github Advisory Database (via NPM Audit API): https://github.com/advisories/",
+      "RETIREJS": "This report may contain data retrieved from the RetireJS community: https://retirejs.github.io/retire.js/",
+      "OSSINDEX": "This report may contain data retrieved from the Sonatype OSS Index: https://ossindex.sonatype.org"
+    }
+  },
+  "dependencies": [
+    {
+      "isVirtual": false,
+      "fileName": "debugger.js",
+      "filePath": "/home/dev/Documents/projet/projet/env/lib/python3.13/site-packages/werkzeug/debug/shared/debugger.js",
+      "md5": "de9209fac36422b450670008fd23ea01",
+      "sha1": "327128d76ac358b4a6b3b64264b4667e2300bb9e",
+      "sha256": "b60e36499b35495998599fbf163e442cae7e14b1e718d42b7a2d0ad81cbc070f",
+      "evidenceCollected": {
+        "vendorEvidence": [],
+        "productEvidence": [],
+        "versionEvidence": []
+      }
+    },
+    {
+      "isVirtual": false,
+      "fileName": "emscripten_fetch_worker.js",
+      "filePath": "/home/dev/Documents/projet/projet/env/lib/python3.13/site-packages/urllib3/contrib/emscripten/emscripten_fetch_worker.js",
+      "md5": "61e482fefc658e27c22400932fe5fba9",
+      "sha1": "7f4135b5d6fe3a6dabb5363ba700ca9890550bb5",
+      "sha256": "cf5937cd9e3f84329ddfeb4def0cf3f0b1e31c2da9c4dfeebbc07793d0fd0377",
+      "evidenceCollected": {
+        "vendorEvidence": [],
+        "productEvidence": [],
+        "versionEvidence": []
+      }
+    }
+  ]
+}
