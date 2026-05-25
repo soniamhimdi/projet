@@ -3,7 +3,9 @@
 L’analyse SAST réalisée avec Semgrep a permis d’identifier **trois alertes de sécurité** dans le projet. Elles concernent principalement des risques d’injection SQL et une mauvaise protection contre les attaques CSRF. Les résultats sont détaillés ci‑dessous.
 
 ---
+
 ## vulnerabilite implementé detectée : injection SQL
+
 ## 1. ⚠️ Risque d’injection SQL — *portail/reservations/repositories.py* (ligne 137)
 
 Deux règles Semgrep distinctes signalent la même zone de code :
