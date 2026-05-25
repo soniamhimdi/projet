@@ -8,7 +8,9 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = get_user(username);
+        # CORRECTION : semicolon inutile supprimé
+        # user = get_user(username);
+        user = get_user(username)
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.username
             app.logger.info("Utilisateur connecté: %s", username)

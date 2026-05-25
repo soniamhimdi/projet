@@ -110,7 +110,7 @@ def search_reservations_vulnerable(keyword):
     VERSION VOLONTAIREMENT VULNÉRABLE À L'INJECTION SQL.
 
     Cette fonction concatène directement la saisie utilisateur
-    dans la requête SQL.
+    dans la requête SQL exp: "Salle B' OR 1=1 -- "
 
     Elle est ajoutée seulement pour la démonstration du TP.
     Ne doit jamais être utilisée en production.

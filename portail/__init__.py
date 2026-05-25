@@ -4,10 +4,24 @@ from pathlib import Path
 from werkzeug.security import generate_password_hash
 import sqlite3
 import logging, sys
+import os
+from dotenv import load_dotenv
+from flask_wtf.csrf import CSRFProtect  # CORRECTION : protection CSRF
+
+# Chargement des variables d'environnement depuis le fichier .env
+load_dotenv()
 
 app = flask.Flask(__name__)
-app.secret_key = 'CHANGE_ME_SECRET_KEY'
+
+# CORRECTION (CWE-798) : clé secrète codée en dur supprimée
+# app.secret_key = 'CHANGE_ME_SECRET_KEY'
+# Nouvelle clé chargée depuis la variable d'environnement SECRET_KEY (définie dans .env)
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-fallback-changer-en-production')
+
 app.static_folder = 'static'
+
+# CORRECTION (CWE-352) : activation de la protection CSRF sur tous les formulaires POST
+csrf = CSRFProtect(app)
 
 app.logger.setLevel(logging.INFO)
 app.logger.propagate = True
@@ -16,6 +30,20 @@ fh = logging.FileHandler('audit.log')
 fh.setLevel(logging.INFO)
 fh.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s'))
 app.logger.addHandler(fh)
+
+# CORRECTION (CWE-693, CWE-1021) : en-têtes de sécurité HTTP ajoutés à chaque réponse
+# Corrige les alertes ZAP : CSP absent, clickjacking, MIME sniffing, version serveur exposée
+@app.after_request
+def add_security_headers(response):
+    # Interdit le chargement de ressources externes non autorisées (protection XSS)
+    response.headers['Content-Security-Policy'] = "default-src 'self'; style-src 'self' 'unsafe-inline'"
+    # Interdit l'intégration dans une iframe (protection clickjacking)
+    response.headers['X-Frame-Options'] = 'DENY'
+    # Empêche le MIME sniffing par le navigateur
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    # Masque la version du serveur (Werkzeug/Python exposés par défaut)
+    response.headers['Server'] = 'Apache'
+    return response
 
 def init_db():
     if not Path(config.Config.DATABASE_PATH).exists():

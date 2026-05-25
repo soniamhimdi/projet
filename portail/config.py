@@ -1,2 +1,4 @@
 class Config:
-    DATABASE_PATH = 'database.db';
+    # CORRECTION : semicolon inutile supprimé
+    # DATABASE_PATH = 'database.db';
+    DATABASE_PATH = 'database.db'
