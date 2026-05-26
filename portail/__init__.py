@@ -43,6 +43,8 @@ def add_security_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'
     # Masque la version du serveur (Werkzeug/Python exposés par défaut)
     response.headers['Server'] = 'Apache'
+    # Empêche la mise en cache des ressources authentifiées (protection contre la fuite d'informations)
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
     return response
 
 def init_db():
